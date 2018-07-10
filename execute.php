@@ -279,7 +279,12 @@ elseif(strstr($text, "cacciolinobot"))
 	$response = "Ciao, sono il cacciolinobot. Come stai? Se vuoi vedere una lista dei miei comandi scrivi /help";
 	
 }
-
+//git
+elseif(strstr($text, "git"))
+{
+	$response = "hub";
+	
+}
 
 //questo serve per fare uh uh quando si riceve una foto
 elseif(isset($message['photo']))
