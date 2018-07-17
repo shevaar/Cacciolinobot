@@ -31,7 +31,15 @@ $text = isset($message['text']) ? $message['text'] : "";
 $botUrl = "https://api.telegram.org/bot" . BOT_TOKEN . "/sendPhoto";
 $text = trim($text);
 $text = strtolower($text);
+//salvare le ChatId in un vettore	
+$Chat_vector[]=array();
+if (in_array ( $chatId , $Chat_Vector ))
+{
+	array_push($Chat_vector, $ChatId);	
+	};
 
+
+//
 $lotto ="";
 header("Content-Type: application/json");
 $response = '';
@@ -271,6 +279,26 @@ elseif(strstr($text, "cacciolinobot"))
 	$response = "Ciao, sono il cacciolinobot. Come stai? Se vuoi vedere una lista dei miei comandi scrivi /help";
 	
 }
+
+
+//questo serve per fare uh uh quando si riceve una foto
+elseif(isset($message['photo']))
+{
+	$response = "Uh uh!";
+
+}
+elseif(strstr($text, "cacciolino, parliamone"))
+{
+		$i=0;
+		while($i<1)
+		{
+		$response="di cosa vorresti parlare?";
+		
+		sleep(5);
+		$text=$i;
+		}
+	}
+
 //git
 elseif(strstr($text, "git"))
 {
@@ -278,11 +306,6 @@ elseif(strstr($text, "git"))
 	
 }
 
-//questo serve per fare uh uh quando si riceve una foto
-elseif(isset($message['photo']))
-{
-	$response = "Uh uh!";
-}
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 //leggere i dati dell'app
