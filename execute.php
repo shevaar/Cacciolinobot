@@ -292,6 +292,20 @@ elseif(isset($message['photo']))
 	$response = "Uh uh!";
 }
 
+
+elseif(strstr($text, "cacciolino, parliamone"))
+{
+		$i=0;
+		while($i<1)
+		{
+		$response="di cosa vorresti parlare?";
+		
+		sleep(5);
+		$text=$i;
+		}
+	}
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 //leggere i dati dell'app
 elseif(strstr($text, "rendiconto federico")){
