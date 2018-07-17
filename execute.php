@@ -316,6 +316,11 @@ elseif(strstr($text, "struzzo"))
 	// read curl response
 	$output = curl_exec($ch);
 	}
+	elseif(strstr($text, "loop"))
+	{
+		ReplyLoop();
+		}
+	
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1770,11 +1775,20 @@ if(!empty($html)){ //if any html is actually returned
 	
 	}
 }
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 
 
 $parameters = array('chat_id' => $chatId, "text" => $response);
 $parameters["method"] = "sendMessage";
 echo json_encode($parameters);
+
+function ReplyLoop()
+{
+		for($i = 1; $i <= 10; $i++)
+		{$response=$i;}
+	}
 
 
 function APUMessage()
