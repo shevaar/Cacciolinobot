@@ -302,6 +302,11 @@ elseif(strstr($text, "cacciolino giochiamo insieme"))
 		}
 	$response = "";
 	}
+//test
+elseif(strstr($text, "test"))
+{
+	$response="Qui qualcosa non va";
+	}
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 //leggere i dati dell'app
 elseif(strstr($text, "rendiconto federico")){
