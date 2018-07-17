@@ -295,13 +295,11 @@ elseif(isset($message['photo']))
 
 elseif(strstr($text, "cacciolino, parliamone"))
 {
-		$i=0;
-		while($i<1)
+		while(1>0)
 		{
 		$response="di cosa vorresti parlare?";
 		
-		sleep(5);
-		$text=$i;
+		sleep(10);
 		}
 	}
 
