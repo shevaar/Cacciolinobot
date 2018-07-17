@@ -2,9 +2,6 @@
 define("BOT_TOKEN", "424659159:AAHh_Q9wAZ00qe-FWe6Tk3kNtSG9F5ea1hg");		//token
 $content = file_get_contents("php://input");
 $update = json_decode($content, true);										//nessuna idea di cosa sia json_decode, sta nella cartella dropbox
-$bot = new \LINE\LINEBot(new CurlHTTPClient($BOT_TOKEN), [
-    'channelSecret' => 'your-channel-secret'
-]);
 define('BOTAPI', 'https://api.telegram.org/bot' . $BOT_TOKEN . '/');
 
 
