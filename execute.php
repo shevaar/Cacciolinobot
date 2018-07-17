@@ -321,13 +321,12 @@ elseif(strstr($text, "struzzo"))
 elseif(strstr($text, "loop"))
 	{
 		for($i = 1; $i <= 10; $i++){
-		$postFields = array('chat_id' => $chatId, 'text' => "ciao");
+		$postFields = array('chat_id' => $chatId, 'text' => "Le tartarughe sono la migliore invenzione dell'uomo -cit.");
 	$ch = curl_init(); 
-	curl_setopt($ch, CURLOPT_HEADER, false);
-  curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-  curl_setopt($ch, CURLOPT_POST, 1);
-  curl_setopt($ch, CURLOPT_POSTFIELDS, ($postFields));
-  curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+	curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type:multipart/form-data"));
+	curl_setopt($ch, CURLOPT_URL, $botUrl); 
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+	curl_setopt($ch, CURLOPT_POSTFIELDS, $postFields);
 	// read curl response
 	$output = curl_exec($ch);
 		}
