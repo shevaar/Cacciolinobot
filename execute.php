@@ -293,8 +293,9 @@ elseif(isset($message['photo']))
 }
 //Cacciolino giochiamo insieme
 elseif(strstr($text, "cacciolino giochiamo insieme"))
-{	$numero=1;
-	while($numero>0){
+{	$numero=10;
+	while($numero>0)
+	{
 		$response="Il numero è $numero";
 		$response="Dimmi un nuovo numero";
 		time.sleep(10);
