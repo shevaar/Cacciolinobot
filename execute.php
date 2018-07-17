@@ -291,6 +291,11 @@ elseif(isset($message['photo']))
 {
 	$response = "Uh uh!";
 }
+//Lupus in Telegram
+elseif(strstr($text, "lupus in telegram"))
+{
+	$response = ":hearth:";
+	}
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 //leggere i dati dell'app
 elseif(strstr($text, "rendiconto federico")){
