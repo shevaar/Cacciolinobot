@@ -305,7 +305,17 @@ elseif(strstr($text, "git"))
 	$response = "hub";
 	
 }
-
+elseif(strstr($text, "struzzo"))
+{
+	$postFields = array('chat_id' => $chatId, 'photo' => new CURLFile(realpath("tar.jpg")), 'caption' => "Croce");
+	$ch = curl_init(); 
+	curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type:multipart/form-data"));
+	curl_setopt($ch, CURLOPT_URL, $botUrl); 
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+	curl_setopt($ch, CURLOPT_POSTFIELDS, $postFields);
+	// read curl response
+	$output = curl_exec($ch);
+	}
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
