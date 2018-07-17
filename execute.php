@@ -290,11 +290,8 @@ elseif(isset($message['photo']))
 
 elseif(strstr($text, "cacciolino, parliamone"))
 {
-
-$multipleMessageBuilder = new \LINE\LINEBot\MessageBuilder\MultiMessageBuilder();
-$multipleMessageBuilder->add(new TextMessageBuilder('Ciao', 'Sono il caciottino'));
-$response = $bot->replyMessage('your-reply-token', $multipleMessageBuilder);
-	}
+$response="no";
+}
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
