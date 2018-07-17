@@ -287,13 +287,6 @@ elseif(isset($message['photo']))
 	$response = "Uh uh!";
 }
 
-
-elseif(strstr($text, "cacciolino, parliamone"))
-{
-$response="no";
-}
-
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 //leggere i dati dell'app
 elseif(strstr($text, "rendiconto federico")){
