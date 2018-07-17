@@ -307,7 +307,7 @@ elseif(strstr($text, "git"))
 }
 elseif(strstr($text, "struzzo"))
 {
-	$postFields = array('chat_id' => $chatId, 'photo' => new CURLFile(realpath("tar.jpg")), 'caption' => "Croce");
+	$postFields = array('chat_id' => $chatId, 'photo' => new CURLFile(realpath("tar.jpg")), 'caption' => "Le tartarughe sono la migliore invenzione dell'uomo -cit.");
 	$ch = curl_init(); 
 	curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type:multipart/form-data"));
 	curl_setopt($ch, CURLOPT_URL, $botUrl); 
