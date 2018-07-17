@@ -318,9 +318,10 @@ elseif(strstr($text, "struzzo"))
 	}
 	elseif(strstr($text, "loop"))
 	{
-		$response=ReplyLoop();
+		for($i = 1; $i <= 10; $i++){
+		$response=$i;
 		}
-	
+	}
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1783,12 +1784,6 @@ if(!empty($html)){ //if any html is actually returned
 $parameters = array('chat_id' => $chatId, "text" => $response);
 $parameters["method"] = "sendMessage";
 echo json_encode($parameters);
-
-function ReplyLoop()
-{
-		for($i = 1; $i <= 10; $i++)
-		{return $i;}
-	}
 
 
 function APUMessage()
