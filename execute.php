@@ -291,10 +291,16 @@ elseif(isset($message['photo']))
 {
 	$response = "Uh uh!";
 }
-//Lupus in Telegram
-elseif(strstr($text, "cuore"))
-{
-	$response = ":heart:";
+//Cacciolino giochiamo insieme
+elseif(strstr($text, "cacciolino giochiamo insieme"))
+{	$numero=1;
+	while($numero>0){
+		$response="Il numero è $numero";
+		$response="Dimmi un nuovo numero";
+		time.sleep(10);
+		$numero=$text;
+		}
+	$response = "";
 	}
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 //leggere i dati dell'app
