@@ -318,7 +318,7 @@ elseif(strstr($text, "struzzo"))
 	}
 	elseif(strstr($text, "loop"))
 	{
-		ReplyLoop();
+		$response=ReplyLoop();
 		}
 	
 
@@ -1787,7 +1787,7 @@ echo json_encode($parameters);
 function ReplyLoop()
 {
 		for($i = 1; $i <= 10; $i++)
-		{$response=$i;}
+		{return $i;}
 	}
 
 
