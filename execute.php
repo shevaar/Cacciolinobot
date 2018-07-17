@@ -2,6 +2,9 @@
 define("BOT_TOKEN", "424659159:AAHh_Q9wAZ00qe-FWe6Tk3kNtSG9F5ea1hg");		//token
 $content = file_get_contents("php://input");
 $update = json_decode($content, true);										//nessuna idea di cosa sia json_decode, sta nella cartella dropbox
+$bot = new \LINE\LINEBot(new CurlHTTPClient($BOT_TOKEN), [
+    'channelSecret' => 'your-channel-secret'
+]);
 define('BOTAPI', 'https://api.telegram.org/bot' . $BOT_TOKEN . '/');
 
 
@@ -31,15 +34,7 @@ $text = isset($message['text']) ? $message['text'] : "";
 $botUrl = "https://api.telegram.org/bot" . BOT_TOKEN . "/sendPhoto";
 $text = trim($text);
 $text = strtolower($text);
-//salvare le ChatId in un vettore	
-$Chat_vector[]=array();
-if (in_array ( $chatId , $Chat_Vector ))
-{
-	array_push($Chat_vector, $ChatId);	
-	};
 
-
-//
 $lotto ="";
 header("Content-Type: application/json");
 $response = '';
@@ -295,12 +290,10 @@ elseif(isset($message['photo']))
 
 elseif(strstr($text, "cacciolino, parliamone"))
 {
-		while(1>0)
-		{
-		$response="di cosa vorresti parlare?";
-		
-		sleep(10);
-		}
+
+$multipleMessageBuilder = new \LINE\LINEBot\MessageBuilder\MultiMessageBuilder();
+$multipleMessageBuilder->add(new TextMessageBuilder('Ciao', 'Sono il caciottino'));
+$response = $bot->replyMessage('your-reply-token', $multipleMessageBuilder);
 	}
 
 
