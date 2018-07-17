@@ -321,7 +321,7 @@ elseif(strstr($text, "struzzo"))
 elseif(strstr($text, "loop"))
 	{
 		for($i = 1; $i <= 10; $i++){
-		$postFields = array('chat_id' => $chatId, 'photo' => new CURLFile(realpath("tar.jpg")), 'caption' => "Le tartarughe sono la migliore invenzione dell'uomo -cit.");
+		$postFields = array('chat_id' => $chatId, 'text' => "$i");
 	$ch = curl_init(); 
 	curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type:multipart/form-data"));
 	curl_setopt($ch, CURLOPT_URL, $botUrl); 
