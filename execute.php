@@ -306,6 +306,7 @@ elseif(strstr($text, "git"))
 	
 }
 
+
 elseif(strstr($text, "struzzo"))
 {
 	$postFields = array('chat_id' => $chatId, 'photo' => new CURLFile(realpath("tar.jpg")), 'caption' => "Le tartarughe sono la migliore invenzione dell'uomo -cit.");
@@ -317,7 +318,6 @@ elseif(strstr($text, "struzzo"))
 	// read curl response
 	$output = curl_exec($ch);
 	}
-
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 //leggere i dati dell'app
@@ -337,15 +337,15 @@ if(!empty($html)){ //if any html is actually returned
 	$pokemon_xpath = new DOMXPath($pokemon_doc);
 
 	//get all the h2's with an id
-	$row1 = $pokemon_xpath->query('//table[3]/tr[15]/td[2]');
-	$row2 = $pokemon_xpath->query('//table[3]/tr[16]/td[2]');
-	$row3 = $pokemon_xpath->query('//table[3]/tr[17]/td[2]');
-	$row4 = $pokemon_xpath->query('//table[3]/tr[18]/td[2]');
-	$row5 = $pokemon_xpath->query('//table[3]/tr[19]/td[2]');
-	$row6 = $pokemon_xpath->query('//table[3]/tr[20]/td[2]');
-	$row7 = $pokemon_xpath->query('//table[3]/tr[21]/td[2]');
-	$row8 = $pokemon_xpath->query('//table[3]/tr[22]/td[2]');
-	$row9 = $pokemon_xpath->query('//table[3]/tr[23]/td[2]');
+	$row1 = $pokemon_xpath->query('//table[3]/tr[14]/td[2]');
+	$row2 = $pokemon_xpath->query('//table[3]/tr[15]/td[2]');
+	$row3 = $pokemon_xpath->query('//table[3]/tr[16]/td[2]');
+	$row4 = $pokemon_xpath->query('//table[3]/tr[17]/td[2]');
+	$row5 = $pokemon_xpath->query('//table[3]/tr[18]/td[2]');
+	$row6 = $pokemon_xpath->query('//table[3]/tr[19]/td[2]');
+	$row7 = $pokemon_xpath->query('//table[3]/tr[20]/td[2]');
+	$row8 = $pokemon_xpath->query('//table[3]/tr[21]/td[2]');
+	$row9 = $pokemon_xpath->query('//table[3]/tr[22]/td[2]');
 
 	if($row1->length > 0){
 		foreach($row1 as $row){
@@ -415,15 +415,15 @@ if(!empty($html)){ //if any html is actually returned
 	$pokemon_xpath = new DOMXPath($pokemon_doc);
 
 	//get all the h2's with an id
-	$row1 = $pokemon_xpath->query('//table[3]/tr[24]/td[2]');
-	$row2 = $pokemon_xpath->query('//table[3]/tr[25]/td[2]');
-	$row3 = $pokemon_xpath->query('//table[3]/tr[26]/td[2]');
-	$row4 = $pokemon_xpath->query('//table[3]/tr[27]/td[2]');
-	$row5 = $pokemon_xpath->query('//table[3]/tr[28]/td[2]');
-	$row6 = $pokemon_xpath->query('//table[3]/tr[29]/td[2]');
-	$row7 = $pokemon_xpath->query('//table[3]/tr[30]/td[2]');
-	$row8 = $pokemon_xpath->query('//table[3]/tr[31]/td[2]');
-	$row9 = $pokemon_xpath->query('//table[3]/tr[32]/td[2]');
+	$row1 = $pokemon_xpath->query('//table[3]/tr[23]/td[2]');
+	$row2 = $pokemon_xpath->query('//table[3]/tr[24]/td[2]');
+	$row3 = $pokemon_xpath->query('//table[3]/tr[25]/td[2]');
+	$row4 = $pokemon_xpath->query('//table[3]/tr[26]/td[2]');
+	$row5 = $pokemon_xpath->query('//table[3]/tr[27]/td[2]');
+	$row6 = $pokemon_xpath->query('//table[3]/tr[28]/td[2]');
+	$row7 = $pokemon_xpath->query('//table[3]/tr[29]/td[2]');
+	$row8 = $pokemon_xpath->query('//table[3]/tr[30]/td[2]');
+	$row9 = $pokemon_xpath->query('//table[3]/tr[31]/td[2]');
 
 	if($row1->length > 0){
 		foreach($row1 as $row){
@@ -493,15 +493,15 @@ if(!empty($html)){ //if any html is actually returned
 	$pokemon_xpath = new DOMXPath($pokemon_doc);
 
 	//get all the h2's with an id
-	$row1 = $pokemon_xpath->query('//table[3]/tr[33]/td[2]');
-	$row2 = $pokemon_xpath->query('//table[3]/tr[34]/td[2]');
-	$row3 = $pokemon_xpath->query('//table[3]/tr[35]/td[2]');
-	$row4 = $pokemon_xpath->query('//table[3]/tr[36]/td[2]');
-	$row5 = $pokemon_xpath->query('//table[3]/tr[37]/td[2]');
-	$row6 = $pokemon_xpath->query('//table[3]/tr[38]/td[2]');
-	$row7 = $pokemon_xpath->query('//table[3]/tr[39]/td[2]');
-	$row8 = $pokemon_xpath->query('//table[3]/tr[40]/td[2]');
-	$row9 = $pokemon_xpath->query('//table[3]/tr[41]/td[2]');
+	$row1 = $pokemon_xpath->query('//table[3]/tr[32]/td[2]');
+	$row2 = $pokemon_xpath->query('//table[3]/tr[33]/td[2]');
+	$row3 = $pokemon_xpath->query('//table[3]/tr[34]/td[2]');
+	$row4 = $pokemon_xpath->query('//table[3]/tr[35]/td[2]');
+	$row5 = $pokemon_xpath->query('//table[3]/tr[36]/td[2]');
+	$row6 = $pokemon_xpath->query('//table[3]/tr[37]/td[2]');
+	$row7 = $pokemon_xpath->query('//table[3]/tr[38]/td[2]');
+	$row8 = $pokemon_xpath->query('//table[3]/tr[39]/td[2]');
+	$row9 = $pokemon_xpath->query('//table[3]/tr[40]/td[2]');
 
 	if($row1->length > 0){
 		foreach($row1 as $row){
@@ -571,15 +571,15 @@ if(!empty($html)){ //if any html is actually returned
 	$pokemon_xpath = new DOMXPath($pokemon_doc);
 
 	//get all the h2's with an id
-	$row1 = $pokemon_xpath->query('//table[3]/tr[42]/td[2]');
-	$row2 = $pokemon_xpath->query('//table[3]/tr[43]/td[2]');
-	$row3 = $pokemon_xpath->query('//table[3]/tr[44]/td[2]');
-	$row4 = $pokemon_xpath->query('//table[3]/tr[45]/td[2]');
-	$row5 = $pokemon_xpath->query('//table[3]/tr[46]/td[2]');
-	$row6 = $pokemon_xpath->query('//table[3]/tr[47]/td[2]');
-	$row7 = $pokemon_xpath->query('//table[3]/tr[48]/td[2]');
-	$row8 = $pokemon_xpath->query('//table[3]/tr[49]/td[2]');
-	$row9 = $pokemon_xpath->query('//table[3]/tr[50]/td[2]');
+	$row1 = $pokemon_xpath->query('//table[3]/tr[41]/td[2]');
+	$row2 = $pokemon_xpath->query('//table[3]/tr[42]/td[2]');
+	$row3 = $pokemon_xpath->query('//table[3]/tr[43]/td[2]');
+	$row4 = $pokemon_xpath->query('//table[3]/tr[44]/td[2]');
+	$row5 = $pokemon_xpath->query('//table[3]/tr[45]/td[2]');
+	$row6 = $pokemon_xpath->query('//table[3]/tr[46]/td[2]');
+	$row7 = $pokemon_xpath->query('//table[3]/tr[47]/td[2]');
+	$row8 = $pokemon_xpath->query('//table[3]/tr[48]/td[2]');
+	$row9 = $pokemon_xpath->query('//table[3]/tr[49]/td[2]');
 
 	if($row1->length > 0){
 		foreach($row1 as $row){
@@ -649,15 +649,15 @@ if(!empty($html)){ //if any html is actually returned
 	$pokemon_xpath = new DOMXPath($pokemon_doc);
 
 	//get all the h2's with an id
-	$row1 = $pokemon_xpath->query('//table[3]/tr[54]/td[2]');
-	$row2 = $pokemon_xpath->query('//table[3]/tr[55]/td[2]');
-	$row3 = $pokemon_xpath->query('//table[3]/tr[56]/td[2]');
-	$row4 = $pokemon_xpath->query('//table[3]/tr[57]/td[2]');
-	$row5 = $pokemon_xpath->query('//table[3]/tr[58]/td[2]');
-	$row6 = $pokemon_xpath->query('//table[3]/tr[59]/td[2]');
-	$row7 = $pokemon_xpath->query('//table[3]/tr[60]/td[2]');
-	$row8 = $pokemon_xpath->query('//table[3]/tr[61]/td[2]');
-	$row9 = $pokemon_xpath->query('//table[3]/tr[62]/td[2]');
+	$row1 = $pokemon_xpath->query('//table[3]/tr[53]/td[2]');
+	$row2 = $pokemon_xpath->query('//table[3]/tr[54]/td[2]');
+	$row3 = $pokemon_xpath->query('//table[3]/tr[55]/td[2]');
+	$row4 = $pokemon_xpath->query('//table[3]/tr[56]/td[2]');
+	$row5 = $pokemon_xpath->query('//table[3]/tr[57]/td[2]');
+	$row6 = $pokemon_xpath->query('//table[3]/tr[58]/td[2]');
+	$row7 = $pokemon_xpath->query('//table[3]/tr[59]/td[2]');
+	$row8 = $pokemon_xpath->query('//table[3]/tr[60]/td[2]');
+	$row9 = $pokemon_xpath->query('//table[3]/tr[61]/td[2]');
 
 	if($row1->length > 0){
 		foreach($row1 as $row){
@@ -727,15 +727,15 @@ if(!empty($html)){ //if any html is actually returned
 	$pokemon_xpath = new DOMXPath($pokemon_doc);
 
 	//get all the h2's with an id
-	$row1 = $pokemon_xpath->query('//table[3]/tr[63]/td[2]');
-	$row2 = $pokemon_xpath->query('//table[3]/tr[64]/td[2]');
-	$row3 = $pokemon_xpath->query('//table[3]/tr[65]/td[2]');
-	$row4 = $pokemon_xpath->query('//table[3]/tr[66]/td[2]');
-	$row5 = $pokemon_xpath->query('//table[3]/tr[67]/td[2]');
-	$row6 = $pokemon_xpath->query('//table[3]/tr[68]/td[2]');
-	$row7 = $pokemon_xpath->query('//table[3]/tr[69]/td[2]');
-	$row8 = $pokemon_xpath->query('//table[3]/tr[70]/td[2]');
-	$row9 = $pokemon_xpath->query('//table[3]/tr[71]/td[2]');
+	$row1 = $pokemon_xpath->query('//table[3]/tr[62]/td[2]');
+	$row2 = $pokemon_xpath->query('//table[3]/tr[63]/td[2]');
+	$row3 = $pokemon_xpath->query('//table[3]/tr[64]/td[2]');
+	$row4 = $pokemon_xpath->query('//table[3]/tr[65]/td[2]');
+	$row5 = $pokemon_xpath->query('//table[3]/tr[66]/td[2]');
+	$row6 = $pokemon_xpath->query('//table[3]/tr[67]/td[2]');
+	$row7 = $pokemon_xpath->query('//table[3]/tr[68]/td[2]');
+	$row8 = $pokemon_xpath->query('//table[3]/tr[69]/td[2]');
+	$row9 = $pokemon_xpath->query('//table[3]/tr[70]/td[2]');
 
 	if($row1->length > 0){
 		foreach($row1 as $row){
@@ -805,15 +805,15 @@ if(!empty($html)){ //if any html is actually returned
 	$pokemon_xpath = new DOMXPath($pokemon_doc);
 
 	//get all the h2's with an id
-	$row1 = $pokemon_xpath->query('//table[3]/tr[72]/td[2]');
-	$row2 = $pokemon_xpath->query('//table[3]/tr[73]/td[2]');
-	$row3 = $pokemon_xpath->query('//table[3]/tr[74]/td[2]');
-	$row4 = $pokemon_xpath->query('//table[3]/tr[75]/td[2]');
-	$row5 = $pokemon_xpath->query('//table[3]/tr[76]/td[2]');
-	$row6 = $pokemon_xpath->query('//table[3]/tr[77]/td[2]');
-	$row7 = $pokemon_xpath->query('//table[3]/tr[78]/td[2]');
-	$row8 = $pokemon_xpath->query('//table[3]/tr[79]/td[2]');
-	$row9 = $pokemon_xpath->query('//table[3]/tr[80]/td[2]');
+	$row1 = $pokemon_xpath->query('//table[3]/tr[71]/td[2]');
+	$row2 = $pokemon_xpath->query('//table[3]/tr[72]/td[2]');
+	$row3 = $pokemon_xpath->query('//table[3]/tr[73]/td[2]');
+	$row4 = $pokemon_xpath->query('//table[3]/tr[74]/td[2]');
+	$row5 = $pokemon_xpath->query('//table[3]/tr[75]/td[2]');
+	$row6 = $pokemon_xpath->query('//table[3]/tr[76]/td[2]');
+	$row7 = $pokemon_xpath->query('//table[3]/tr[77]/td[2]');
+	$row8 = $pokemon_xpath->query('//table[3]/tr[78]/td[2]');
+	$row9 = $pokemon_xpath->query('//table[3]/tr[79]/td[2]');
 
 	if($row1->length > 0){
 		foreach($row1 as $row){
@@ -883,15 +883,15 @@ if(!empty($html)){ //if any html is actually returned
 	$pokemon_xpath = new DOMXPath($pokemon_doc);
 
 	//get all the h2's with an id
-	$row1 = $pokemon_xpath->query('//table[3]/tr[82]/td[2]');
-	$row2 = $pokemon_xpath->query('//table[3]/tr[83]/td[2]');
-	$row3 = $pokemon_xpath->query('//table[3]/tr[84]/td[2]');
-	$row4 = $pokemon_xpath->query('//table[3]/tr[85]/td[2]');
-	$row5 = $pokemon_xpath->query('//table[3]/tr[86]/td[2]');
-	$row6 = $pokemon_xpath->query('//table[3]/tr[87]/td[2]');
-	$row7 = $pokemon_xpath->query('//table[3]/tr[88]/td[2]');
-	$row8 = $pokemon_xpath->query('//table[3]/tr[89]/td[2]');
-	$row9 = $pokemon_xpath->query('//table[3]/tr[90]/td[2]');
+	$row1 = $pokemon_xpath->query('//table[3]/tr[81]/td[2]');
+	$row2 = $pokemon_xpath->query('//table[3]/tr[82]/td[2]');
+	$row3 = $pokemon_xpath->query('//table[3]/tr[83]/td[2]');
+	$row4 = $pokemon_xpath->query('//table[3]/tr[84]/td[2]');
+	$row5 = $pokemon_xpath->query('//table[3]/tr[85]/td[2]');
+	$row6 = $pokemon_xpath->query('//table[3]/tr[86]/td[2]');
+	$row7 = $pokemon_xpath->query('//table[3]/tr[87]/td[2]');
+	$row8 = $pokemon_xpath->query('//table[3]/tr[88]/td[2]');
+	$row9 = $pokemon_xpath->query('//table[3]/tr[89]/td[2]');
 
 	if($row1->length > 0){
 		foreach($row1 as $row){
@@ -961,15 +961,15 @@ if(!empty($html)){ //if any html is actually returned
 	$pokemon_xpath = new DOMXPath($pokemon_doc);
 
 	//get all the h2's with an id
-	$row1 = $pokemon_xpath->query('//table[3]/tr[91]/td[2]');
-	$row2 = $pokemon_xpath->query('//table[3]/tr[92]/td[2]');
-	$row3 = $pokemon_xpath->query('//table[3]/tr[93]/td[2]');
-	$row4 = $pokemon_xpath->query('//table[3]/tr[94]/td[2]');
-	$row5 = $pokemon_xpath->query('//table[3]/tr[95]/td[2]');
-	$row6 = $pokemon_xpath->query('//table[3]/tr[96]/td[2]');
-	$row7 = $pokemon_xpath->query('//table[3]/tr[97]/td[2]');
-	$row8 = $pokemon_xpath->query('//table[3]/tr[98]/td[2]');
-	$row9 = $pokemon_xpath->query('//table[3]/tr[99]/td[2]');
+	$row1 = $pokemon_xpath->query('//table[3]/tr[90]/td[2]');
+	$row2 = $pokemon_xpath->query('//table[3]/tr[91]/td[2]');
+	$row3 = $pokemon_xpath->query('//table[3]/tr[92]/td[2]');
+	$row4 = $pokemon_xpath->query('//table[3]/tr[93]/td[2]');
+	$row5 = $pokemon_xpath->query('//table[3]/tr[94]/td[2]');
+	$row6 = $pokemon_xpath->query('//table[3]/tr[95]/td[2]');
+	$row7 = $pokemon_xpath->query('//table[3]/tr[96]/td[2]');
+	$row8 = $pokemon_xpath->query('//table[3]/tr[97]/td[2]');
+	$row9 = $pokemon_xpath->query('//table[3]/tr[98]/td[2]');
 
 	if($row1->length > 0){
 		foreach($row1 as $row){
