@@ -1785,9 +1785,6 @@ if(!empty($html)){ //if any html is actually returned
 	
 	}
 }
-////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 
 
 $parameters = array('chat_id' => $chatId, "text" => $response);
