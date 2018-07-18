@@ -305,6 +305,7 @@ elseif(strstr($text, "git"))
 	$response = "hub";
 	
 }
+
 elseif(strstr($text, "struzzo"))
 {
 	$postFields = array('chat_id' => $chatId, 'photo' => new CURLFile(realpath("tar.jpg")), 'caption' => "Le tartarughe sono la migliore invenzione dell'uomo -cit.");
@@ -316,21 +317,6 @@ elseif(strstr($text, "struzzo"))
 	// read curl response
 	$output = curl_exec($ch);
 	}
-	
-	
-elseif(strstr($text, "loop"))
-	{
-		for($i = 1; $i <= 10; $i++){
-  $postFields = array('chat_id' => $chatId, 'text' => "Le tartarughe sono la migliore invenzione dell'uomo -cit.");
-	$ch = curl_init(); 
-	curl_setopt($ch, CURLOPT_HTTPHEADER, false);
-	curl_setopt($ch, CURLOPT_URL, $botUrl); 
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
-	curl_setopt($ch, CURLOPT_POSTFIELDS, $postFields);
-	// read curl response
-	$output = curl_exec($ch);
-	}
-}
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
