@@ -201,14 +201,20 @@ elseif(strstr($text, "pranzo"))
 	$response = "Mettiamoci sopra il tabasco! Il tabasco sta bene su tutto!";
 	}
 }
+
+
 elseif(strstr($text, "git"))
 {
   $response = "HUB";
 }
+
+
 elseif(strstr($text, "komodo"))
 {
   $response = "drake";
 }
+
+
 elseif(strstr($text, "/whoamI"))
 {
   $response = $chatId,$username,$firstname,$lastname;
