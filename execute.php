@@ -12,9 +12,9 @@ if(!$update)
 
 $url='http://spesecasapaolo-168013.appspot.com/'; 
 
- 
-$GLOBALS['APUMessages'] = array('Il tabasco è il profumo della vita','Sogno di essere un sognatore' );												//array delle frasi random
+ $GLOBALS['APUMessages'] = array('Il tabasco è il profumo della vita','Sogno di essere un sognatore' );												//array delle frasi random
 $GLOBALS['Lotteria'] = array('Filippo', 'Federico','Ludovico','Mattheu','Pietro','Sara','Michele');		//array delle persone per lotteria
+
 
 //Parte da non toccare, sono le definizioni dei messaggi, della chat e dell'user. Ogni volta che mandiamo un messaggio
 //da qualche parte dove c'è cacciolinobot questi dati vengono inviati di default. ISSET serve solo a controllare che il 
@@ -31,6 +31,13 @@ $text = isset($message['text']) ? $message['text'] : "";
 $botUrl = "https://api.telegram.org/bot" . BOT_TOKEN . "/sendPhoto";
 $text = trim($text);
 $text = strtolower($text);
+//salvare le ChatId in un vettore	
+$Chat_vector[]=array();
+if (in_array ( $chatId , $Chat_Vector ))
+{
+	array_push($Chat_vector, $ChatId);	
+	};
+
 
 //
 $lotto ="";
@@ -192,7 +199,7 @@ elseif(strstr($text, "broccoli"))
 	}
 }
 //diciassette
-elseif(strstr($text, "pranzo"))
+elseif(strstr($text, "tabasco"))
 {
 	if(strstr($firstname, "matteo"))
 	{$response = "MATTHEU!";}
@@ -201,6 +208,19 @@ elseif(strstr($text, "pranzo"))
 	}
 }
 
+//Mandare messaggi a tutti quelli in Chat_Vector
+elseif(strstr($text, "Manda un messaggio a tutti"))
+{
+	foreach($Chat_Vector as $chatId)
+	{
+	$text='Sciao beli';
+	$parameters = array('chat_id' => $chatId, "text" => $text);
+// method è il metodo per l'invio di un messaggio (cfr. API di Telegram)
+$parameters["method"] = "sendMessage";
+// converto e stampo l'array JSON sulla response
+echo json_encode($parameters);
+	}
+}
 
 //Leggi diciotto
 elseif(strstr($text, "random"))
@@ -211,7 +231,7 @@ elseif(strstr($text, "random"))
 //diciassette, qui una volta c'era un comando che non ho più rimesso, prima o poi lo farò
 elseif(strstr($text, "/help"))
 {
-	$response ="Ciao $firstname qui c'è una lista dei comandi disponibili: \n Lotteria \n Testa o croce \n Random \n Simmetria matrice \n Rendiconto $firstname" ;
+	$response ="Ciao $firstname qui c'è una lista dei comandi disponibili: \n Lotteria \n Testa o croce \n Random \n Simmetria matrice \n Rendiconto;
 }
 
 // diciotto, lotteria
@@ -222,8 +242,9 @@ elseif(strstr($text, "lotteria"))
 	$response ="E il vincitore della lotteria è $lotto";
 }
 
-//diciannove, foto toc
 
+
+//diciannove, foto toc
 //questo è il codice per mandare fotografie. Bisogna caricare nella cartella dropbox la foto e cambiare 
 //il nome file qui sotto.
 elseif(strstr($text, "testa o croce"))
@@ -259,11 +280,42 @@ elseif(strstr($text, "cacciolinobot"))
 	
 }
 
+
 //questo serve per fare uh uh quando si riceve una foto
 elseif(isset($message['photo']))
 {
 	$response = "Uh uh!";
+
 }
+
+
+//git
+elseif(strstr($text, "git"))
+{
+	$response = "hub";
+	
+}
+//komodo
+elseif(strstr($text, "komodo"))
+{
+	$response = "Drake";
+	
+}
+
+
+elseif(strstr($text, "struzzo"))
+{
+	$postFields = array('chat_id' => $chatId, 'photo' => new CURLFile(realpath("tar.jpg")), 'caption' => "Le tartarughe sono la migliore invenzione dell'uomo -cit.");
+	$ch = curl_init(); 
+	curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type:multipart/form-data"));
+	curl_setopt($ch, CURLOPT_URL, $botUrl); 
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+	curl_setopt($ch, CURLOPT_POSTFIELDS, $postFields);
+	// read curl response
+	$output = curl_exec($ch);
+	}
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 //leggere i dati dell'app
 elseif(strstr($text, "rendiconto federico")){
@@ -972,8 +1024,8 @@ if(!empty($html)){ //if any html is actually returned
 ////////////////////////simmetria////////////////////////////
 elseif(strstr($text, "simmetria matrice"))
 {
-	{
-$html = file_get_contents($url); //get the html returned from the following url
+{
+	$html = file_get_contents($url); //get the html returned from the following url
 
 $pokemon_doc = new DOMDocument();
 
@@ -985,241 +1037,686 @@ if(!empty($html)){ //if any html is actually returned
 	libxml_clear_errors(); //remove errors for yucky html
 	
 	$pokemon_xpath = new DOMXPath($pokemon_doc);
-	$somma=0;
-	$contatore_asimmetria=0;
-	
-	{
-		
-	$row11 = $pokemon_xpath->query('//table[3]/tr[14]/td[2]');
-	$somma=floatval($row11->nodeValue);
-	$contatore_asimmetria++;
-	
-	$row12 = $pokemon_xpath->query('//table[3]/tr[15]/td[2]');
-	$row21 = $pokemon_xpath->query('//table[3]/tr[23]/td[2]');
-	$somma=$somma+floatval($row12->nodeValue)+floatval($row21->nodeValue);
-	$contatore_asimmetria++;
-	
-	$row13 = $pokemon_xpath->query('//table[3]/tr[16]/td[2]');
-	$row31 = $pokemon_xpath->query('//table[3]/tr[32]/td[2]');
-	$somma=$somma+floatval($row13->nodeValue)+floatval($row31->nodeValue);
-	$contatore_asimmetria++;
-		
-	$row14 = $pokemon_xpath->query('//table[3]/tr[17]/td[2]');
-	$row41 = $pokemon_xpath->query('//table[3]/tr[41]/td[2]');
-	$somma=$somma+floatval($row14->nodeValue)+floatval($row41->nodeValue);
-	$contatore_asimmetria++;
-	
-	$row15 = $pokemon_xpath->query('//table[3]/tr[18]/td[2]');
-	$row51 = $pokemon_xpath->query('//table[3]/tr[53]/td[2]');
-	$somma=$somma+floatval($row15->nodeValue)+floatval($row51->nodeValue);
-	$contatore_asimmetria++;
-	
-	$row16 = $pokemon_xpath->query('//table[3]/tr[19]/td[2]');
-	$row61 = $pokemon_xpath->query('//table[3]/tr[62]/td[2]');
-	$somma=$somma+floatval($row16->nodeValue)+floatval($row61->nodeValue);
-	$contatore_asimmetria++;
-	
-	$row17 = $pokemon_xpath->query('//table[3]/tr[20]/td[2]');
-	$row71 = $pokemon_xpath->query('//table[3]/tr[71]/td[2]');
-	$somma=$somma+floatval($row17->nodeValue)+floatval($row71->nodeValue);
-	$contatore_asimmetria++;
-	
-	$row18 = $pokemon_xpath->query('//table[3]/tr[21]/td[2]');
-	$row81 = $pokemon_xpath->query('//table[3]/tr[81]/td[2]');	
-	$somma=$somma+floatval($row18->nodeValue)+floatval($row81->nodeValue);
-	$contatore_asimmetria++;
-	
-	$row19 = $pokemon_xpath->query('//table[3]/tr[22]/td[2]');
-	$row91 = $pokemon_xpath->query('//table[3]/tr[90]/td[2]');
-	$somma=$somma+floatval($row19->nodeValue)+floatval($row91->nodeValue);
-	$contatore_asimmetria++;
-	
-	$row22 = $pokemon_xpath->query('//table[3]/tr[24]/td[2]');
-	$somma=$somma+floatval($row22->nodeValue);
-	$contatore_asimmetria++;
-	
-	$row23 = $pokemon_xpath->query('//table[3]/tr[25]/td[2]');
-	$row32 = $pokemon_xpath->query('//table[3]/tr[33]/td[2]');
-	$somma=$somma+floatval($row23->nodeValue)+floatval($row32->nodeValue);
-	$contatore_asimmetria++;
-	
-	$row24 = $pokemon_xpath->query('//table[3]/tr[26]/td[2]');
-	$row42 = $pokemon_xpath->query('//table[3]/tr[42]/td[2]');
-	$somma=$somma+floatval($row24->nodeValue)+floatval($row42->nodeValue);
-	$contatore_asimmetria++;
-	
-	$row25 = $pokemon_xpath->query('//table[3]/tr[27]/td[2]');
-	$row52 = $pokemon_xpath->query('//table[3]/tr[54]/td[2]');
-	$somma=$somma+floatval($row25->nodeValue)+floatval($row52->nodeValue);
-	$contatore_asimmetria++;
-	
-	$row26 = $pokemon_xpath->query('//table[3]/tr[28]/td[2]');
-	$row62 = $pokemon_xpath->query('//table[3]/tr[63]/td[2]');
-	$somma=$somma+floatval($row26->nodeValue)+floatval($row62->nodeValue);
-	$contatore_asimmetria++;
-	
-	$row27 = $pokemon_xpath->query('//table[3]/tr[29]/td[2]');
-	$row72 = $pokemon_xpath->query('//table[3]/tr[72]/td[2]');
-	$somma=$somma+floatval($row27->nodeValue)+floatval($row72->nodeValue);
-	$contatore_asimmetria++;
-	
-	$row28 = $pokemon_xpath->query('//table[3]/tr[30]/td[2]');
-	$row82 = $pokemon_xpath->query('//table[3]/tr[82]/td[2]');
-	$somma=$somma+floatval($row28->nodeValue)+floatval($row82->nodeValue);
-	$contatore_asimmetria++;
-	
-	$row29 = $pokemon_xpath->query('//table[3]/tr[31]/td[2]');
-	$row92 = $pokemon_xpath->query('//table[3]/tr[91]/td[2]');
-	$somma=$somma+floatval($row29->nodeValue)+floatval($row92->nodeValue);
-	$contatore_asimmetria++;	
-	
-	$row33 = $pokemon_xpath->query('//table[3]/tr[34]/td[2]');
-	$somma=$somma+floatval($row33->nodeValue);
-	$contatore_asimmetria++;	
-	
-	$row34 = $pokemon_xpath->query('//table[3]/tr[35]/td[2]');
-	$row43 = $pokemon_xpath->query('//table[3]/tr[43]/td[2]');
-	$somma=$somma+floatval($row34->nodeValue)+floatval($row43->nodeValue);
-	$contatore_asimmetria++;
-	
-	$row35 = $pokemon_xpath->query('//table[3]/tr[36]/td[2]');
-	$row53 = $pokemon_xpath->query('//table[3]/tr[55]/td[2]');
-	$somma=$somma+floatval($row35->nodeValue)+floatval($row53->nodeValue);
-	$contatore_asimmetria++;
-	
-	$row36 = $pokemon_xpath->query('//table[3]/tr[37]/td[2]');
-	$row63 = $pokemon_xpath->query('//table[3]/tr[64]/td[2]');
-	$somma=$somma+floatval($row36->nodeValue)+floatval($row63->nodeValue);
-	$contatore_asimmetria++;
-	
-	$row37 = $pokemon_xpath->query('//table[3]/tr[38]/td[2]');
-	$row73 = $pokemon_xpath->query('//table[3]/tr[73]/td[2]');
-	$somma=$somma+floatval($row37->nodeValue)+floatval($row73->nodeValue);
-	$contatore_asimmetria++;
-	
-	$row38 = $pokemon_xpath->query('//table[3]/tr[39]/td[2]');
-	$row83 = $pokemon_xpath->query('//table[3]/tr[83]/td[2]');
-	$somma=$somma+floatval($row38->nodeValue)+floatval($row83->nodeValue);
-	$contatore_asimmetria++;
-	
-	$row39 = $pokemon_xpath->query('//table[3]/tr[40]/td[2]');
-	$row93 = $pokemon_xpath->query('//table[3]/tr[92]/td[2]');
-	$somma=$somma+floatval($row39->nodeValue)+floatval($row93->nodeValue);
-	$contatore_asimmetria++;
-	
-	$row44 = $pokemon_xpath->query('//table[3]/tr[44]/td[2]');
-	$somma=$somma+floatval($row44->nodeValue);
-	$contatore_asimmetria++;
-	
-	$row45 = $pokemon_xpath->query('//table[3]/tr[45]/td[2]');
-	$row54 = $pokemon_xpath->query('//table[3]/tr[56]/td[2]');
-	$somma=$somma+floatval($row45->nodeValue)+floatval($row54->nodeValue);
-	$contatore_asimmetria++;
-	
-	$row46 = $pokemon_xpath->query('//table[3]/tr[46]/td[2]');
-	$row64 = $pokemon_xpath->query('//table[3]/tr[65]/td[2]');
-	$somma=$somma+floatval($row46->nodeValue)+floatval($row64->nodeValue);
-	$contatore_asimmetria++;
-	
-	$row47 = $pokemon_xpath->query('//table[3]/tr[47]/td[2]');
-	$row74 = $pokemon_xpath->query('//table[3]/tr[74]/td[2]');
-	$somma=$somma+floatval($row47->nodeValue)+floatval($row74->nodeValue);
-	$contatore_asimmetria++;
-	
-	$row48 = $pokemon_xpath->query('//table[3]/tr[48]/td[2]');
-	$row84 = $pokemon_xpath->query('//table[3]/tr[84]/td[2]');
-	$somma=$somma+floatval($row48->nodeValue)+floatval($row84->nodeValue);
-	$contatore_asimmetria++;
-	
-	$row49 = $pokemon_xpath->query('//table[3]/tr[49]/td[2]');
-	$row94 = $pokemon_xpath->query('//table[3]/tr[93]/td[2]');
-	$somma=$somma+floatval($row49->nodeValue)+floatval($row94->nodeValue);
-	$contatore_asimmetria++;	
-	
-	$row55 = $pokemon_xpath->query('//table[3]/tr[57]/td[2]');
-	$somma=$somma+floatval($row55->nodeValue);
-	$contatore_asimmetria++;
-		
-	$row56 = $pokemon_xpath->query('//table[3]/tr[58]/td[2]');
-	$row65 = $pokemon_xpath->query('//table[3]/tr[66]/td[2]');
-	$somma=$somma+floatval($row56->nodeValue)+floatval($row65->nodeValue);
-	$contatore_asimmetria++;	
-	
-	$row57 = $pokemon_xpath->query('//table[3]/tr[59]/td[2]');
-	$row75 = $pokemon_xpath->query('//table[3]/tr[75]/td[2]');
-	$somma=$somma+floatval($row57->nodeValue)+floatval($row75->nodeValue);
-	$contatore_asimmetria++;
-	
-	$row58 = $pokemon_xpath->query('//table[3]/tr[60]/td[2]');
-	$row85 = $pokemon_xpath->query('//table[3]/tr[85]/td[2]');
-	$somma=$somma+floatval($row58->nodeValue)+floatval($row85->nodeValue);
-	$contatore_asimmetria++;
-	
-	$row59 = $pokemon_xpath->query('//table[3]/tr[61]/td[2]');
-	$row95 = $pokemon_xpath->query('//table[3]/tr[94]/td[2]');
-	$somma=$somma+floatval($row59->nodeValue)+floatval($row95->nodeValue);
-	$contatore_asimmetria++;
-		
-	$row66 = $pokemon_xpath->query('//table[3]/tr[67]/td[2]');
-	$somma=$somma+floatval($row66->nodeValue);
-	$contatore_asimmetria++;
-	
-	$row67 = $pokemon_xpath->query('//table[3]/tr[68]/td[2]');
-	$row76 = $pokemon_xpath->query('//table[3]/tr[76]/td[2]');
-	$somma=$somma+floatval($row67->nodeValue)+floatval($row76->nodeValue);
-	$contatore_asimmetria++;
-	
-	$row68 = $pokemon_xpath->query('//table[3]/tr[69]/td[2]');
-	$row86 = $pokemon_xpath->query('//table[3]/tr[86]/td[2]');
-	$somma=$somma+floatval($row68->nodeValue)+floatval($row86->nodeValue);
-	$contatore_asimmetria++;
-	
-	$row69 = $pokemon_xpath->query('//table[3]/tr[70]/td[2]');
-	$row96 = $pokemon_xpath->query('//table[3]/tr[95]/td[2]');
-	$somma=$somma+floatval($row69->nodeValue)+floatval($row96->nodeValue);
-	$contatore_asimmetria++;
-		
-	$row77 = $pokemon_xpath->query('//table[3]/tr[77]/td[2]');
-	$somma=$somma+floatval($row77->nodeValue);
-	$contatore_asimmetria++;
-	
-	$row78 = $pokemon_xpath->query('//table[3]/tr[78]/td[2]');
-	$row87 = $pokemon_xpath->query('//table[3]/tr[87]/td[2]');
-	$somma=$somma+floatval($row78->nodeValue)+floatval($row87->nodeValue);
-	$contatore_asimmetria++;	
-	
-	$row79 = $pokemon_xpath->query('//table[3]/tr[79]/td[2]');
-	$row97 = $pokemon_xpath->query('//table[3]/tr[96]/td[2]');
-	$somma=$somma+floatval($row79->nodeValue)+floatval($row97->nodeValue);
-	$contatore_asimmetria++;
-		
-	$row88 = $pokemon_xpath->query('//table[3]/tr[88]/td[2]');
-	$somma=$somma+floatval($row88->nodeValue);
-	$contatore_asimmetria++;
-	
-	$row89 = $pokemon_xpath->query('//table[3]/tr[89]/td[2]');
-	$row98 = $pokemon_xpath->query('//table[3]/tr[97]/td[2]');
-	$somma=$somma+floatval($row89->nodeValue)+floatval($row98->nodeValue);
-	$contatore_asimmetria++;
-	
-	$row99 = $pokemon_xpath->query('//table[3]/tr[98]/td[2]');
-	$somma=$somma+floatval($row99->nodeValue);
-	$contatore_asimmetria++;
+
+	//get all the h2's with an id
+	$row1 = $pokemon_xpath->query('//table[3]/tr[14]/td[2]');
+	$row2 = $pokemon_xpath->query('//table[3]/tr[15]/td[2]');
+	$row3 = $pokemon_xpath->query('//table[3]/tr[16]/td[2]');
+	$row4 = $pokemon_xpath->query('//table[3]/tr[17]/td[2]');
+	$row5 = $pokemon_xpath->query('//table[3]/tr[18]/td[2]');
+	$row6 = $pokemon_xpath->query('//table[3]/tr[19]/td[2]');
+	$row7 = $pokemon_xpath->query('//table[3]/tr[20]/td[2]');
+	$row8 = $pokemon_xpath->query('//table[3]/tr[21]/td[2]');
+	$row9 = $pokemon_xpath->query('//table[3]/tr[22]/td[2]');
+
+	if($row1->length > 0){
+		foreach($row1 as $row){
+			$culo1=$row->nodeValue;
+		}
 	}
+	if($row2->length > 0){
+		foreach($row2 as $row){
+			$culo2=$row->nodeValue;
+		}
+	}
+	if($row3->length > 0){
+		foreach($row3 as $row){
+			$culo3=$row->nodeValue;
+		}
+	}
+	if($row4->length > 0){
+		foreach($row4 as $row){
+			$culo4=$row->nodeValue;
+		}
+	}
+	if($row5->length > 0){
+		foreach($row5 as $row){
+			$culo5=$row->nodeValue;
+		}
+	}
+	if($row6->length > 0){
+		foreach($row6 as $row){
+			$culo6=$row->nodeValue;
+		}
+	}
+	if($row7->length > 0){
+		foreach($row7 as $row){
+			$culo7=$row->nodeValue;
+		}
+	}
+	if($row8->length > 0){
+		foreach($row8 as $row){
+			$culo8=$row->nodeValue;
+		}
+	}
+	if($row9->length > 0){
+		foreach($row9 as $row){
+			$culo9=$row->nodeValue;
+		}
+	}
+	
+	$culo10=floatval(ltrim($culo1, '"'))+floatval(ltrim($culo2, '"'))+floatval(ltrim($culo3, '"'))+floatval(ltrim($culo4, '"'))+floatval(ltrim($culo5, '"'))+floatval(ltrim($culo6, '"'))+floatval(ltrim($culo7, '"'))+floatval(ltrim($culo8, '"'))+floatval(ltrim($culo9, '"'));
+	
+}	
+	
+	
+} //federico
+{
+	$html = file_get_contents($url); //get the html returned from the following url
+
+$pokemon_doc = new DOMDocument();
+
+libxml_use_internal_errors(TRUE); //disable libxml errors
+
+if(!empty($html)){ //if any html is actually returned
+
+	$pokemon_doc->loadHTML($html);
+	libxml_clear_errors(); //remove errors for yucky html
+	
+	$pokemon_xpath = new DOMXPath($pokemon_doc);
+
+	//get all the h2's with an id
+	$row1 = $pokemon_xpath->query('//table[3]/tr[23]/td[2]');
+	$row2 = $pokemon_xpath->query('//table[3]/tr[24]/td[2]');
+	$row3 = $pokemon_xpath->query('//table[3]/tr[25]/td[2]');
+	$row4 = $pokemon_xpath->query('//table[3]/tr[26]/td[2]');
+	$row5 = $pokemon_xpath->query('//table[3]/tr[27]/td[2]');
+	$row6 = $pokemon_xpath->query('//table[3]/tr[28]/td[2]');
+	$row7 = $pokemon_xpath->query('//table[3]/tr[29]/td[2]');
+	$row8 = $pokemon_xpath->query('//table[3]/tr[30]/td[2]');
+	$row9 = $pokemon_xpath->query('//table[3]/tr[31]/td[2]');
+
+	if($row1->length > 0){
+		foreach($row1 as $row){
+			$culo1=$row->nodeValue;
+		}
+	}
+	if($row2->length > 0){
+		foreach($row2 as $row){
+			$culo2=$row->nodeValue;
+		}
+	}
+	if($row3->length > 0){
+		foreach($row3 as $row){
+			$culo3=$row->nodeValue;
+		}
+	}
+	if($row4->length > 0){
+		foreach($row4 as $row){
+			$culo4=$row->nodeValue;
+		}
+	}
+	if($row5->length > 0){
+		foreach($row5 as $row){
+			$culo5=$row->nodeValue;
+		}
+	}
+	if($row6->length > 0){
+		foreach($row6 as $row){
+			$culo6=$row->nodeValue;
+		}
+	}
+	if($row7->length > 0){
+		foreach($row7 as $row){
+			$culo7=$row->nodeValue;
+		}
+	}
+	if($row8->length > 0){
+		foreach($row8 as $row){
+			$culo8=$row->nodeValue;
+		}
+	}
+	if($row9->length > 0){
+		foreach($row9 as $row){
+			$culo9=$row->nodeValue;
+		}
+	}
+	
+	$culo20=floatval(ltrim($culo1, '"'))+floatval(ltrim($culo2, '"'))+floatval(ltrim($culo3, '"'))+floatval(ltrim($culo4, '"'))+floatval(ltrim($culo5, '"'))+floatval(ltrim($culo6, '"'))+floatval(ltrim($culo7, '"'))+floatval(ltrim($culo8, '"'))+floatval(ltrim($culo9, '"'));
+	
 }
+} //filippo
+{
+	$html = file_get_contents($url); //get the html returned from the following url
+
+$pokemon_doc = new DOMDocument();
+
+libxml_use_internal_errors(TRUE); //disable libxml errors
+
+if(!empty($html)){ //if any html is actually returned
+
+	$pokemon_doc->loadHTML($html);
+	libxml_clear_errors(); //remove errors for yucky html
+	
+	$pokemon_xpath = new DOMXPath($pokemon_doc);
+
+	//get all the h2's with an id
+	$row1 = $pokemon_xpath->query('//table[3]/tr[32]/td[2]');
+	$row2 = $pokemon_xpath->query('//table[3]/tr[33]/td[2]');
+	$row3 = $pokemon_xpath->query('//table[3]/tr[34]/td[2]');
+	$row4 = $pokemon_xpath->query('//table[3]/tr[35]/td[2]');
+	$row5 = $pokemon_xpath->query('//table[3]/tr[36]/td[2]');
+	$row6 = $pokemon_xpath->query('//table[3]/tr[37]/td[2]');
+	$row7 = $pokemon_xpath->query('//table[3]/tr[38]/td[2]');
+	$row8 = $pokemon_xpath->query('//table[3]/tr[39]/td[2]');
+	$row9 = $pokemon_xpath->query('//table[3]/tr[40]/td[2]');
+
+	if($row1->length > 0){
+		foreach($row1 as $row){
+			$culo1=$row->nodeValue;
+		}
+	}
+	if($row2->length > 0){
+		foreach($row2 as $row){
+			$culo2=$row->nodeValue;
+		}
+	}
+	if($row3->length > 0){
+		foreach($row3 as $row){
+			$culo3=$row->nodeValue;
+		}
+	}
+	if($row4->length > 0){
+		foreach($row4 as $row){
+			$culo4=$row->nodeValue;
+		}
+	}
+	if($row5->length > 0){
+		foreach($row5 as $row){
+			$culo5=$row->nodeValue;
+		}
+	}
+	if($row6->length > 0){
+		foreach($row6 as $row){
+			$culo6=$row->nodeValue;
+		}
+	}
+	if($row7->length > 0){
+		foreach($row7 as $row){
+			$culo7=$row->nodeValue;
+		}
+	}
+	if($row8->length > 0){
+		foreach($row8 as $row){
+			$culo8=$row->nodeValue;
+		}
+	}
+	if($row9->length > 0){
+		foreach($row9 as $row){
+			$culo9=$row->nodeValue;
+		}
+	}
+	
+	$culo30=floatval(ltrim($culo1, '"'))+floatval(ltrim($culo2, '"'))+floatval(ltrim($culo3, '"'))+floatval(ltrim($culo4, '"'))+floatval(ltrim($culo5, '"'))+floatval(ltrim($culo6, '"'))+floatval(ltrim($culo7, '"'))+floatval(ltrim($culo8, '"'))+floatval(ltrim($culo9, '"'));
+	
 }
 
-	$response = $somma;
+} //gabriele
+{
+	$html = file_get_contents($url); //get the html returned from the following url
 
+$pokemon_doc = new DOMDocument();
+
+libxml_use_internal_errors(TRUE); //disable libxml errors
+
+if(!empty($html)){ //if any html is actually returned
+
+	$pokemon_doc->loadHTML($html);
+	libxml_clear_errors(); //remove errors for yucky html
+	
+	$pokemon_xpath = new DOMXPath($pokemon_doc);
+
+	//get all the h2's with an id
+	$row1 = $pokemon_xpath->query('//table[3]/tr[41]/td[2]');
+	$row2 = $pokemon_xpath->query('//table[3]/tr[42]/td[2]');
+	$row3 = $pokemon_xpath->query('//table[3]/tr[43]/td[2]');
+	$row4 = $pokemon_xpath->query('//table[3]/tr[44]/td[2]');
+	$row5 = $pokemon_xpath->query('//table[3]/tr[45]/td[2]');
+	$row6 = $pokemon_xpath->query('//table[3]/tr[46]/td[2]');
+	$row7 = $pokemon_xpath->query('//table[3]/tr[47]/td[2]');
+	$row8 = $pokemon_xpath->query('//table[3]/tr[48]/td[2]');
+	$row9 = $pokemon_xpath->query('//table[3]/tr[49]/td[2]');
+
+	if($row1->length > 0){
+		foreach($row1 as $row){
+			$culo1=$row->nodeValue;
+		}
+	}
+	if($row2->length > 0){
+		foreach($row2 as $row){
+			$culo2=$row->nodeValue;
+		}
+	}
+	if($row3->length > 0){
+		foreach($row3 as $row){
+			$culo3=$row->nodeValue;
+		}
+	}
+	if($row4->length > 0){
+		foreach($row4 as $row){
+			$culo4=$row->nodeValue;
+		}
+	}
+	if($row5->length > 0){
+		foreach($row5 as $row){
+			$culo5=$row->nodeValue;
+		}
+	}
+	if($row6->length > 0){
+		foreach($row6 as $row){
+			$culo6=$row->nodeValue;
+		}
+	}
+	if($row7->length > 0){
+		foreach($row7 as $row){
+			$culo7=$row->nodeValue;
+		}
+	}
+	if($row8->length > 0){
+		foreach($row8 as $row){
+			$culo8=$row->nodeValue;
+		}
+	}
+	if($row9->length > 0){
+		foreach($row9 as $row){
+			$culo9=$row->nodeValue;
+		}
+	}
+	
+	$culo40=floatval(ltrim($culo1, '"'))+floatval(ltrim($culo2, '"'))+floatval(ltrim($culo3, '"'))+floatval(ltrim($culo4, '"'))+floatval(ltrim($culo5, '"'))+floatval(ltrim($culo6, '"'))+floatval(ltrim($culo7, '"'))+floatval(ltrim($culo8, '"'))+floatval(ltrim($culo9, '"'));
+	
+}
+
+} //ivan
+{
+	$html = file_get_contents($url); //get the html returned from the following url
+
+$pokemon_doc = new DOMDocument();
+
+libxml_use_internal_errors(TRUE); //disable libxml errors
+
+if(!empty($html)){ //if any html is actually returned
+
+	$pokemon_doc->loadHTML($html);
+	libxml_clear_errors(); //remove errors for yucky html
+	
+	$pokemon_xpath = new DOMXPath($pokemon_doc);
+
+	//get all the h2's with an id
+	$row1 = $pokemon_xpath->query('//table[3]/tr[53]/td[2]');
+	$row2 = $pokemon_xpath->query('//table[3]/tr[54]/td[2]');
+	$row3 = $pokemon_xpath->query('//table[3]/tr[55]/td[2]');
+	$row4 = $pokemon_xpath->query('//table[3]/tr[56]/td[2]');
+	$row5 = $pokemon_xpath->query('//table[3]/tr[57]/td[2]');
+	$row6 = $pokemon_xpath->query('//table[3]/tr[58]/td[2]');
+	$row7 = $pokemon_xpath->query('//table[3]/tr[59]/td[2]');
+	$row8 = $pokemon_xpath->query('//table[3]/tr[60]/td[2]');
+	$row9 = $pokemon_xpath->query('//table[3]/tr[61]/td[2]');
+
+	if($row1->length > 0){
+		foreach($row1 as $row){
+			$culo1=$row->nodeValue;
+		}
+	}
+	if($row2->length > 0){
+		foreach($row2 as $row){
+			$culo2=$row->nodeValue;
+		}
+	}
+	if($row3->length > 0){
+		foreach($row3 as $row){
+			$culo3=$row->nodeValue;
+		}
+	}
+	if($row4->length > 0){
+		foreach($row4 as $row){
+			$culo4=$row->nodeValue;
+		}
+	}
+	if($row5->length > 0){
+		foreach($row5 as $row){
+			$culo5=$row->nodeValue;
+		}
+	}
+	if($row6->length > 0){
+		foreach($row6 as $row){
+			$culo6=$row->nodeValue;
+		}
+	}
+	if($row7->length > 0){
+		foreach($row7 as $row){
+			$culo7=$row->nodeValue;
+		}
+	}
+	if($row8->length > 0){
+		foreach($row8 as $row){
+			$culo8=$row->nodeValue;
+		}
+	}
+	if($row9->length > 0){
+		foreach($row9 as $row){
+			$culo9=$row->nodeValue;
+		}
+	}
+	
+	$culo50=floatval(ltrim($culo1, '"'))+floatval(ltrim($culo2, '"'))+floatval(ltrim($culo3, '"'))+floatval(ltrim($culo4, '"'))+floatval(ltrim($culo5, '"'))+floatval(ltrim($culo6, '"'))+floatval(ltrim($culo7, '"'))+floatval(ltrim($culo8, '"'))+floatval(ltrim($culo9, '"'));
+	
+}
+} //ludovico
+{
+	$html = file_get_contents($url); //get the html returned from the following url
+
+$pokemon_doc = new DOMDocument();
+
+libxml_use_internal_errors(TRUE); //disable libxml errors
+
+if(!empty($html)){ //if any html is actually returned
+
+	$pokemon_doc->loadHTML($html);
+	libxml_clear_errors(); //remove errors for yucky html
+	
+	$pokemon_xpath = new DOMXPath($pokemon_doc);
+
+	//get all the h2's with an id
+	$row1 = $pokemon_xpath->query('//table[3]/tr[62]/td[2]');
+	$row2 = $pokemon_xpath->query('//table[3]/tr[63]/td[2]');
+	$row3 = $pokemon_xpath->query('//table[3]/tr[64]/td[2]');
+	$row4 = $pokemon_xpath->query('//table[3]/tr[65]/td[2]');
+	$row5 = $pokemon_xpath->query('//table[3]/tr[66]/td[2]');
+	$row6 = $pokemon_xpath->query('//table[3]/tr[67]/td[2]');
+	$row7 = $pokemon_xpath->query('//table[3]/tr[68]/td[2]');
+	$row8 = $pokemon_xpath->query('//table[3]/tr[69]/td[2]');
+	$row9 = $pokemon_xpath->query('//table[3]/tr[70]/td[2]');
+
+	if($row1->length > 0){
+		foreach($row1 as $row){
+			$culo1=$row->nodeValue;
+		}
+	}
+	if($row2->length > 0){
+		foreach($row2 as $row){
+			$culo2=$row->nodeValue;
+		}
+	}
+	if($row3->length > 0){
+		foreach($row3 as $row){
+			$culo3=$row->nodeValue;
+		}
+	}
+	if($row4->length > 0){
+		foreach($row4 as $row){
+			$culo4=$row->nodeValue;
+		}
+	}
+	if($row5->length > 0){
+		foreach($row5 as $row){
+			$culo5=$row->nodeValue;
+		}
+	}
+	if($row6->length > 0){
+		foreach($row6 as $row){
+			$culo6=$row->nodeValue;
+		}
+	}
+	if($row7->length > 0){
+		foreach($row7 as $row){
+			$culo7=$row->nodeValue;
+		}
+	}
+	if($row8->length > 0){
+		foreach($row8 as $row){
+			$culo8=$row->nodeValue;
+		}
+	}
+	if($row9->length > 0){
+		foreach($row9 as $row){
+			$culo9=$row->nodeValue;
+		}
+	}
+	
+	$culo60=floatval(ltrim($culo1, '"'))+floatval(ltrim($culo2, '"'))+floatval(ltrim($culo3, '"'))+floatval(ltrim($culo4, '"'))+floatval(ltrim($culo5, '"'))+floatval(ltrim($culo6, '"'))+floatval(ltrim($culo7, '"'))+floatval(ltrim($culo8, '"'))+floatval(ltrim($culo9, '"'));
+	
+}
+
+} //matteo
+{
+	$html = file_get_contents($url); //get the html returned from the following url
+
+$pokemon_doc = new DOMDocument();
+
+libxml_use_internal_errors(TRUE); //disable libxml errors
+
+if(!empty($html)){ //if any html is actually returned
+
+	$pokemon_doc->loadHTML($html);
+	libxml_clear_errors(); //remove errors for yucky html
+	
+	$pokemon_xpath = new DOMXPath($pokemon_doc);
+
+	//get all the h2's with an id
+	$row1 = $pokemon_xpath->query('//table[3]/tr[71]/td[2]');
+	$row2 = $pokemon_xpath->query('//table[3]/tr[72]/td[2]');
+	$row3 = $pokemon_xpath->query('//table[3]/tr[73]/td[2]');
+	$row4 = $pokemon_xpath->query('//table[3]/tr[74]/td[2]');
+	$row5 = $pokemon_xpath->query('//table[3]/tr[75]/td[2]');
+	$row6 = $pokemon_xpath->query('//table[3]/tr[76]/td[2]');
+	$row7 = $pokemon_xpath->query('//table[3]/tr[77]/td[2]');
+	$row8 = $pokemon_xpath->query('//table[3]/tr[78]/td[2]');
+	$row9 = $pokemon_xpath->query('//table[3]/tr[79]/td[2]');
+
+	if($row1->length > 0){
+		foreach($row1 as $row){
+			$culo1=$row->nodeValue;
+		}
+	}
+	if($row2->length > 0){
+		foreach($row2 as $row){
+			$culo2=$row->nodeValue;
+		}
+	}
+	if($row3->length > 0){
+		foreach($row3 as $row){
+			$culo3=$row->nodeValue;
+		}
+	}
+	if($row4->length > 0){
+		foreach($row4 as $row){
+			$culo4=$row->nodeValue;
+		}
+	}
+	if($row5->length > 0){
+		foreach($row5 as $row){
+			$culo5=$row->nodeValue;
+		}
+	}
+	if($row6->length > 0){
+		foreach($row6 as $row){
+			$culo6=$row->nodeValue;
+		}
+	}
+	if($row7->length > 0){
+		foreach($row7 as $row){
+			$culo7=$row->nodeValue;
+		}
+	}
+	if($row8->length > 0){
+		foreach($row8 as $row){
+			$culo8=$row->nodeValue;
+		}
+	}
+	if($row9->length > 0){
+		foreach($row9 as $row){
+			$culo9=$row->nodeValue;
+		}
+	}
+	
+	$culo70=floatval(ltrim($culo1, '"'))+floatval(ltrim($culo2, '"'))+floatval(ltrim($culo3, '"'))+floatval(ltrim($culo4, '"'))+floatval(ltrim($culo5, '"'))+floatval(ltrim($culo6, '"'))+floatval(ltrim($culo7, '"'))+floatval(ltrim($culo8, '"'))+floatval(ltrim($culo9, '"'));
+	
+}
+
+} //michele
+{
+	$html = file_get_contents($url); //get the html returned from the following url
+
+$pokemon_doc = new DOMDocument();
+
+libxml_use_internal_errors(TRUE); //disable libxml errors
+
+if(!empty($html)){ //if any html is actually returned
+
+	$pokemon_doc->loadHTML($html);
+	libxml_clear_errors(); //remove errors for yucky html
+	
+	$pokemon_xpath = new DOMXPath($pokemon_doc);
+
+	//get all the h2's with an id
+	$row1 = $pokemon_xpath->query('//table[3]/tr[81]/td[2]');
+	$row2 = $pokemon_xpath->query('//table[3]/tr[82]/td[2]');
+	$row3 = $pokemon_xpath->query('//table[3]/tr[83]/td[2]');
+	$row4 = $pokemon_xpath->query('//table[3]/tr[84]/td[2]');
+	$row5 = $pokemon_xpath->query('//table[3]/tr[85]/td[2]');
+	$row6 = $pokemon_xpath->query('//table[3]/tr[86]/td[2]');
+	$row7 = $pokemon_xpath->query('//table[3]/tr[87]/td[2]');
+	$row8 = $pokemon_xpath->query('//table[3]/tr[88]/td[2]');
+	$row9 = $pokemon_xpath->query('//table[3]/tr[89]/td[2]');
+
+	if($row1->length > 0){
+		foreach($row1 as $row){
+			$culo1=$row->nodeValue;
+		}
+	}
+	if($row2->length > 0){
+		foreach($row2 as $row){
+			$culo2=$row->nodeValue;
+		}
+	}
+	if($row3->length > 0){
+		foreach($row3 as $row){
+			$culo3=$row->nodeValue;
+		}
+	}
+	if($row4->length > 0){
+		foreach($row4 as $row){
+			$culo4=$row->nodeValue;
+		}
+	}
+	if($row5->length > 0){
+		foreach($row5 as $row){
+			$culo5=$row->nodeValue;
+		}
+	}
+	if($row6->length > 0){
+		foreach($row6 as $row){
+			$culo6=$row->nodeValue;
+		}
+	}
+	if($row7->length > 0){
+		foreach($row7 as $row){
+			$culo7=$row->nodeValue;
+		}
+	}
+	if($row8->length > 0){
+		foreach($row8 as $row){
+			$culo8=$row->nodeValue;
+		}
+	}
+	if($row9->length > 0){
+		foreach($row9 as $row){
+			$culo9=$row->nodeValue;
+		}
+	}
+	
+	$culo80=floatval(ltrim($culo1, '"'))+floatval(ltrim($culo2, '"'))+floatval(ltrim($culo3, '"'))+floatval(ltrim($culo4, '"'))+floatval(ltrim($culo5, '"'))+floatval(ltrim($culo6, '"'))+floatval(ltrim($culo7, '"'))+floatval(ltrim($culo8, '"'))+floatval(ltrim($culo9, '"'));
+	
+}
+
+} //pietro
+{
+	$html = file_get_contents($url); //get the html returned from the following url
+
+$pokemon_doc = new DOMDocument();
+
+libxml_use_internal_errors(TRUE); //disable libxml errors
+
+if(!empty($html)){ //if any html is actually returned
+
+	$pokemon_doc->loadHTML($html);
+	libxml_clear_errors(); //remove errors for yucky html
+	
+	$pokemon_xpath = new DOMXPath($pokemon_doc);
+
+	//get all the h2's with an id
+	$row1 = $pokemon_xpath->query('//table[3]/tr[90]/td[2]');
+	$row2 = $pokemon_xpath->query('//table[3]/tr[91]/td[2]');
+	$row3 = $pokemon_xpath->query('//table[3]/tr[92]/td[2]');
+	$row4 = $pokemon_xpath->query('//table[3]/tr[93]/td[2]');
+	$row5 = $pokemon_xpath->query('//table[3]/tr[94]/td[2]');
+	$row6 = $pokemon_xpath->query('//table[3]/tr[95]/td[2]');
+	$row7 = $pokemon_xpath->query('//table[3]/tr[96]/td[2]');
+	$row8 = $pokemon_xpath->query('//table[3]/tr[97]/td[2]');
+	$row9 = $pokemon_xpath->query('//table[3]/tr[98]/td[2]');
+
+	if($row1->length > 0){
+		foreach($row1 as $row){
+			$culo1=$row->nodeValue;
+		}
+	}
+	if($row2->length > 0){
+		foreach($row2 as $row){
+			$culo2=$row->nodeValue;
+		}
+	}
+	if($row3->length > 0){
+		foreach($row3 as $row){
+			$culo3=$row->nodeValue;
+		}
+	}
+	if($row4->length > 0){
+		foreach($row4 as $row){
+			$culo4=$row->nodeValue;
+		}
+	}
+	if($row5->length > 0){
+		foreach($row5 as $row){
+			$culo5=$row->nodeValue;
+		}
+	}
+	if($row6->length > 0){
+		foreach($row6 as $row){
+			$culo6=$row->nodeValue;
+		}
+	}
+	if($row7->length > 0){
+		foreach($row7 as $row){
+			$culo7=$row->nodeValue;
+		}
+	}
+	if($row8->length > 0){
+		foreach($row8 as $row){
+			$culo8=$row->nodeValue;
+		}
+	}
+	if($row9->length > 0){
+		foreach($row9 as $row){
+			$culo9=$row->nodeValue;
+		}
+	}
+	
+	$culo90=floatval(ltrim($culo1, '"'))+floatval(ltrim($culo2, '"'))+floatval(ltrim($culo3, '"'))+floatval(ltrim($culo4, '"'))+floatval(ltrim($culo5, '"'))+floatval(ltrim($culo6, '"'))+floatval(ltrim($culo7, '"'))+floatval(ltrim($culo8, '"'))+floatval(ltrim($culo9, '"'));
+}
+
+} //sara
+$parziale=$culo10+$culo20+$culo30+$culo40+$culo50+$culo60+$culo70+$culo80+$culo90;
+$response="La somma totale degli elementi della matrice è $parziale.";
 }
 /////////////////////////////////////////////////////////////
+
+
+
 
 $parameters = array('chat_id' => $chatId, "text" => $response);
 $parameters["method"] = "sendMessage";
 echo json_encode($parameters);
-
-
-
 
 
 function APUMessage()
