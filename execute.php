@@ -298,7 +298,7 @@ elseif(strstr($text, "git"))
 //komodo
 elseif(strstr($text, "komodo"))
 {
-	$response = "drake";
+	$response = "Drake";
 	
 }
 
