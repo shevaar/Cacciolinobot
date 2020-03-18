@@ -295,7 +295,7 @@ elseif(strstr($text, "git"))
 	$response = "hub";
 	
 }
-//git
+//komodo
 elseif(strstr($text, "komodo"))
 {
 	$response = "drake";
