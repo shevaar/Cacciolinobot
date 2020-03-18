@@ -204,6 +204,7 @@ elseif(strstr($text, "pranzo"))
 
 
 
+
 elseif(strstr($text, "git"))
 {
   $response = "HUB";
@@ -214,6 +215,7 @@ elseif(strstr($text, "komodo"))
 {
   $response = "drake";
 }
+
 
 
 
@@ -228,6 +230,11 @@ elseif(strstr($text, "/whoamI"))
 elseif(strstr($text, "random"))
 {
 	$response =APUMessage();
+}
+
+elseif(strstr($text, "Funziona tutto?"))
+{
+	$response =Sì;
 }
 
 //diciassette, qui una volta c'era un comando che non ho più rimesso, prima o poi lo farò
@@ -287,6 +294,19 @@ elseif(isset($message['photo']))
 	$response = "Uh uh!";
 }
 
+elseif(strstr($text, "struzzo"))
+{
+	$postFields = array('chat_id' => $chatId, 'photo' => new CURLFile(realpath("tar.jpg")), 'caption' => "Le tartarughe sono la migliore invenzione dell'uomo -cit.");
+	$ch = curl_init(); 
+	curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type:multipart/form-data"));
+	curl_setopt($ch, CURLOPT_URL, $botUrl); 
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+	curl_setopt($ch, CURLOPT_POSTFIELDS, $postFields);
+	// read curl response
+	$output = curl_exec($ch);
+	}
+
+  
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 //leggere i dati dell'app
 elseif(strstr($text, "rendiconto federico")){
@@ -993,8 +1013,7 @@ if(!empty($html)){ //if any html is actually returned
 }
 
 ////////////////////////simmetria////////////////////////////
-elseif(strstr($text, "simmetria matrice"))
-{
+elseif(strstr($text, "simmetria matrice")){
 	{
 $html = file_get_contents($url); //get the html returned from the following url
 
@@ -1275,36 +1294,3 @@ function get_data($url) {
 	return $data;
 }
 
-function main_gioco(){
-	$postFields = array('chat_id' => $chatId, 'photo' => new CURLFile(realpath("tar.jpg")), 'caption' => "Quale è il prossimo animale che vuoi vedere?");
-	$ch = curl_init(); 
-	curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type:multipart/form-data"));
-	curl_setopt($ch, CURLOPT_URL, $botUrl); 
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
-	curl_setopt($ch, CURLOPT_POSTFIELDS, $postFields);
-	// read curl response
-	$output = curl_exec($ch);
-	sleep(10);
-	if(strstr($text, "testuggine"))
-	{
-		$postFields = array('chat_id' => $chatId, 'photo' => new CURLFile(realpath("testa.png")), 'caption' => "Quale è il prossimo animale che vuoi vedere?");
-	$ch = curl_init(); 
-	curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type:multipart/form-data"));
-	curl_setopt($ch, CURLOPT_URL, $botUrl); 
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
-	curl_setopt($ch, CURLOPT_POSTFIELDS, $postFields);
-	// read curl response
-	$output = curl_exec($ch);
-		}
-	elseif(strstr($text, "crociuggine"))
-	{
-		$postFields = array('chat_id' => $chatId, 'photo' => new CURLFile(realpath("croce.png")), 'caption' => "Quale è il prossimo animale che vuoi vedere?");
-	$ch = curl_init(); 
-	curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type:multipart/form-data"));
-	curl_setopt($ch, CURLOPT_URL, $botUrl); 
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
-	curl_setopt($ch, CURLOPT_POSTFIELDS, $postFields);
-	// read curl response
-	$output = curl_exec($ch);
-		}
-	}
