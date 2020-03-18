@@ -215,16 +215,15 @@ elseif(strstr($text, "komodo"))
 {
   $response = "drake";
 }
+elseif(strstr($text, "whoamI"))
+{
+  $response = "$username";
+}
 
 //Leggi diciotto
 elseif(strstr($text, "random"))
 {
 	$response =APUMessage();
-}
-
-elseif(strstr($text, "Funziona tutto?"))
-{
-	$response =Sì;
 }
 
 //diciassette, qui una volta c'era un comando che non ho più rimesso, prima o poi lo farò
