@@ -217,7 +217,7 @@ elseif(strstr($text, "komodo"))
 }
 elseif(strstr($text, "whoamI"))
 {
-  $response = "$username";
+  $response = "You are $username.";
 }
 
 //Leggi diciotto
