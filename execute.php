@@ -201,6 +201,7 @@ elseif(strstr($text, "pranzo"))
 	$response = "Mettiamoci sopra il tabasco! Il tabasco sta bene su tutto!";
 	}
 }
+<<<<<<< HEAD
 
 
 elseif(strstr($text, "git"))
@@ -213,6 +214,8 @@ elseif(strstr($text, "komodo"))
 {
   $response = "drake";
 }
+=======
+>>>>>>> parent of 72cfc43... Update komodo
 
 
 elseif(strstr($text, "/whoamI"))
@@ -283,7 +286,8 @@ elseif(isset($message['photo']))
 {
 	$response = "Uh uh!";
 }
-
+<<<<<<< HEAD
+=======
 
 
 elseif(strstr($text, "struzzo"))
@@ -298,9 +302,14 @@ elseif(strstr($text, "struzzo"))
 	$output = curl_exec($ch);
 	}
 
+elseif(strstr($text, "cacciolino giochiamo"))
+{
+	while(1){
+		main_gioco();
+		}
+	}
 
-
-
+>>>>>>> parent of 2b24011... DEF
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 //leggere i dati dell'app
 elseif(strstr($text, "rendiconto federico")){
@@ -1289,3 +1298,36 @@ function get_data($url) {
 	return $data;
 }
 
+function main_gioco(){
+	$postFields = array('chat_id' => $chatId, 'photo' => new CURLFile(realpath("tar.jpg")), 'caption' => "Quale è il prossimo animale che vuoi vedere?");
+	$ch = curl_init(); 
+	curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type:multipart/form-data"));
+	curl_setopt($ch, CURLOPT_URL, $botUrl); 
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+	curl_setopt($ch, CURLOPT_POSTFIELDS, $postFields);
+	// read curl response
+	$output = curl_exec($ch);
+	sleep(10);
+	if(strstr($text, "testuggine"))
+	{
+		$postFields = array('chat_id' => $chatId, 'photo' => new CURLFile(realpath("testa.png")), 'caption' => "Quale è il prossimo animale che vuoi vedere?");
+	$ch = curl_init(); 
+	curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type:multipart/form-data"));
+	curl_setopt($ch, CURLOPT_URL, $botUrl); 
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+	curl_setopt($ch, CURLOPT_POSTFIELDS, $postFields);
+	// read curl response
+	$output = curl_exec($ch);
+		}
+	elseif(strstr($text, "crociuggine"))
+	{
+		$postFields = array('chat_id' => $chatId, 'photo' => new CURLFile(realpath("croce.png")), 'caption' => "Quale è il prossimo animale che vuoi vedere?");
+	$ch = curl_init(); 
+	curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type:multipart/form-data"));
+	curl_setopt($ch, CURLOPT_URL, $botUrl); 
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+	curl_setopt($ch, CURLOPT_POSTFIELDS, $postFields);
+	// read curl response
+	$output = curl_exec($ch);
+		}
+	}
