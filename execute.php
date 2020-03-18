@@ -32,6 +32,7 @@ $botUrl = "https://api.telegram.org/bot" . BOT_TOKEN . "/sendPhoto";
 $text = trim($text);
 $text = strtolower($text);
 
+
 //
 $lotto ="";
 header("Content-Type: application/json");
@@ -207,6 +208,10 @@ elseif(strstr($text, "git"))
 elseif(strstr($text, "komodo"))
 {
   $response = "drake";
+}
+elseif(strstr($text, "/whoamI"))
+{
+  $response = $chatId,$username,$firstname,$lastname;
 }
 
 
