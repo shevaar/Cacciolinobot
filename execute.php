@@ -203,6 +203,7 @@ elseif(strstr($text, "pranzo"))
 }
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
 elseif(strstr($text, "git"))
@@ -223,6 +224,8 @@ elseif(strstr($text, "/whoamI"))
 {
   $response = $chatId,$username,$firstname,$lastname;
 }
+=======
+>>>>>>> parent of 72cfc43... Update komodo
 =======
 >>>>>>> parent of 72cfc43... Update komodo
 
