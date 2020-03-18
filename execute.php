@@ -231,7 +231,7 @@ elseif(strstr($text, "random"))
 //diciassette, qui una volta c'era un comando che non ho più rimesso, prima o poi lo farò
 elseif(strstr($text, "/help"))
 {
-	$response ="Ciao $firstname qui c'è una lista dei comandi disponibili: \n Lotteria \n Testa o croce \n Random \n Simmetria matrice \n Rendiconto $firstname \n Cacciolino consiglia una ricetta \n Cacciolino dimmi una ricetta a caso"  ;
+	$response ="Ciao $firstname qui c'è una lista dei comandi disponibili: \n Lotteria \n Testa o croce \n Random \n Simmetria matrice \n Rendiconto;
 }
 
 // diciotto, lotteria
@@ -287,22 +287,18 @@ elseif(isset($message['photo']))
 	$response = "Uh uh!";
 
 }
-elseif(strstr($text, "cacciolino, parliamone"))
-{
-		$i=0;
-		while($i<1)
-		{
-		$response="di cosa vorresti parlare?";
-		
-		sleep(5);
-		$text=$i;
-		}
-	}
+
 
 //git
 elseif(strstr($text, "git"))
 {
 	$response = "hub";
+	
+}
+//git
+elseif(strstr($text, "komodo"))
+{
+	$response = "drake";
 	
 }
 
@@ -1715,63 +1711,7 @@ $response="La somma totale degli elementi della matrice è $parziale.";
 }
 /////////////////////////////////////////////////////////////
 
-elseif(strstr($text, "cacciolino consiglia una ricetta"))
-{
-	$html = file_get_contents('http://www.giallozafferano.it/Ultime-ricette/'); //get the html returned from the following url
 
-$pokemon_doc = new DOMDocument();
-
-libxml_use_internal_errors(TRUE); //disable libxml errors
-
-if(!empty($html)){ //if any html is actually returned
-
-	$pokemon_doc->loadHTML($html);
-	libxml_clear_errors(); //remove errors for yucky html
-	
-	$pokemon_xpath = new DOMXPath($pokemon_doc);
-	
-	$row1 = $pokemon_xpath->query('//h3[position() = 1]');
-	
-		if($row1->length > 0){
-		foreach($row1 as $row){
-			$answer=$row->nodeValue;
-		}
-	}
-	$indirizzo=$name = str_replace(' ', '-', $answer);
-	$response="Hai già provato $answer? ecco il link \n http://ricette.giallozafferano.it/".$indirizzo;
-	
-	}
-}
-
-elseif(strstr($text, "cacciolino dimmi una ricetta a caso"))
-{
-	
-	$numeropagina=rand(2,30);
-	$html = file_get_contents('http://www.giallozafferano.it/Ultime-ricette/page'.$numeropagina); //get the html returned from the following url
-
-$pokemon_doc = new DOMDocument();
-
-libxml_use_internal_errors(TRUE); //disable libxml errors
-
-if(!empty($html)){ //if any html is actually returned
-
-	$pokemon_doc->loadHTML($html);
-	libxml_clear_errors(); //remove errors for yucky html
-	
-	$pokemon_xpath = new DOMXPath($pokemon_doc);
-	
-	$row1 = $pokemon_xpath->query('//h3[position() = 1]');
-	
-		if($row1->length > 0){
-		foreach($row1 as $row){
-			$answer=$row->nodeValue;
-		}
-	}
-	$indirizzo=$name = str_replace(' ', '-', $answer);
-	$response="Hai già provato $answer? ecco il link \n http://ricette.giallozafferano.it/".$indirizzo;
-	
-	}
-}
 
 
 $parameters = array('chat_id' => $chatId, "text" => $response);
