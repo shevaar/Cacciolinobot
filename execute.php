@@ -216,16 +216,6 @@ elseif(strstr($text, "komodo"))
   $response = "drake";
 }
 
-
-
-
-elseif(strstr($text, "/whoamI"))
-{
-  $response = $chatId,$username,$firstname,$lastname;
-}
-
-
-
 //Leggi diciotto
 elseif(strstr($text, "random"))
 {
