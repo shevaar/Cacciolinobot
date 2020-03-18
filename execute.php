@@ -201,9 +201,7 @@ elseif(strstr($text, "pranzo"))
 	$response = "Mettiamoci sopra il tabasco! Il tabasco sta bene su tutto!";
 	}
 }
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 
 
 elseif(strstr($text, "git"))
@@ -216,18 +214,14 @@ elseif(strstr($text, "komodo"))
 {
   $response = "drake";
 }
-=======
->>>>>>> parent of 72cfc43... Update komodo
+
 
 
 elseif(strstr($text, "/whoamI"))
 {
   $response = $chatId,$username,$firstname,$lastname;
 }
-=======
->>>>>>> parent of 72cfc43... Update komodo
-=======
->>>>>>> parent of 72cfc43... Update komodo
+
 
 
 //Leggi diciotto
@@ -292,30 +286,7 @@ elseif(isset($message['photo']))
 {
 	$response = "Uh uh!";
 }
-<<<<<<< HEAD
-=======
 
-
-elseif(strstr($text, "struzzo"))
-{
-	$postFields = array('chat_id' => $chatId, 'photo' => new CURLFile(realpath("tar.jpg")), 'caption' => "Le tartarughe sono la migliore invenzione dell'uomo -cit.");
-	$ch = curl_init(); 
-	curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type:multipart/form-data"));
-	curl_setopt($ch, CURLOPT_URL, $botUrl); 
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
-	curl_setopt($ch, CURLOPT_POSTFIELDS, $postFields);
-	// read curl response
-	$output = curl_exec($ch);
-	}
-
-elseif(strstr($text, "cacciolino giochiamo"))
-{
-	while(1){
-		main_gioco();
-		}
-	}
-
->>>>>>> parent of 2b24011... DEF
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 //leggere i dati dell'app
 elseif(strstr($text, "rendiconto federico")){
