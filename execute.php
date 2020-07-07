@@ -146,6 +146,24 @@ elseif(strstr($text, "fratello"))
 	$response = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
 	}
 }
+// bonus
+elseif(strstr($text, "gino"))
+{
+	if(strstr($firstname, "matteo"))
+	{$response = "MATTHEU!";}
+	else{
+	$response = "https://www.youtube.com/watch?v=IgGcek6qd10";
+	}
+}
+// bonus
+elseif(strstr($text, "drago"))
+{
+	if(strstr($firstname, "matteo"))
+	{$response = "MATTHEU!";}
+	else{
+	$response = "https://www.youtube.com/watch?v=IgGcek6qd10";
+	}
+}
 // dodici
 elseif(strstr($text, "studio"))
 {
