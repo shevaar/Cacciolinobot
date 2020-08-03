@@ -13,7 +13,7 @@ if(!$update)
 $url='http://spesecasapaolo-168013.appspot.com/'; 
 
  
-$GLOBALS['APUMessages'] = array('Il tabasco è il profumo della vita','Sogno di essere un sognatore' );												//array delle frasi random
+$GLOBALS['APUMessages'] = array('Il tabasco è il profumo della vita','Sogno di essere un sognatore','Sogno di essere un pescatore' );												//array delle frasi random
 $GLOBALS['Lotteria'] = array('Filippo', 'Federico','Ludovico','Mattheu','Pietro','Sara','Michele');		//array delle persone per lotteria
 
 //Parte da non toccare, sono le definizioni dei messaggi, della chat e dell'user. Ogni volta che mandiamo un messaggio
